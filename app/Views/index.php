@@ -63,9 +63,12 @@
                     </td>
                 </tr>
             <?php endforeach ?>
-            <?= $pager->links() ?>
         </tbody>
     </table>
+  <div class="pagination">
+    <?= $pager->links() ?>
+</div>
+
     <script>
 
         $(document).ready(function () {
@@ -75,9 +78,9 @@
                 }
             });
             $('#SubmitForm').on('submit', function (e) {
-                e.preventDefault();          
-                var id = $('#id').val();   
-                var url = id ? `updatestudent/${id}` : `storestudent`   
+                e.preventDefault();
+                var id = $('#id').val();
+                var url = id ? `updatestudent/${id}` : `storestudent`
                 var formdata = new FormData(this);
 
                 $.ajax({
@@ -88,18 +91,18 @@
                     contentType: false,
                     success: function (response) {
                         $('#SubmitForm')[0].reset();
-                        $('#exampleModal').modal('hide');    
+                        $('#exampleModal').modal('hide');
                         location.reload();
                         alert(response.success);
                     },
                     error: function (response) {
-                        alert(response.responseText);  
+                        alert(response.responseText);
                         console.log(response);
                     }
                 })
             })
-            $(document).on('click', '.editBtn', function () { 
-                var id = $(this).data('id');  
+            $(document).on('click', '.editBtn', function () {
+                var id = $(this).data('id');
                 $.ajax({
                     url: `editstudent/${id}`,
                     type: "GET",
@@ -116,8 +119,8 @@
                 })
             })
 
-            $(document).on('click', '.deleteBtn', function () {  
-                var id = $(this).data('id');  
+            $(document).on('click', '.deleteBtn', function () {
+                var id = $(this).data('id');
                 $.ajax({
                     url: `deletestudent/${id}`,
                     type: "POST",
